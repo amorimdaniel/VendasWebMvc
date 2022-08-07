@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using VendasWebMvc.Models;
 using VendasWebMvc.Data;
-
+using VendasWebMvc.Services;
 namespace VendasWebMvc
 {
     public class Startup
@@ -42,6 +42,7 @@ namespace VendasWebMvc
                     builder.MigrationsAssembly("VendasWebMvc")));
 
             services.AddScoped<ServicoPopular>();
+            services.AddScoped<VendedorServico>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
