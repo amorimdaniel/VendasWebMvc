@@ -22,9 +22,25 @@ namespace VendasWebMvc.Controllers
         }
 
         public async Task<IActionResult> SimpleSearch(DateTime? minData, DateTime? maxData)
-        {  
+        {
+            if (!minData.HasValue)
+            {
+                minData = new DateTime(DateTime.Now.Year, 1, 1);
+            }
+            if (!maxData.HasValue)
+            {
+                maxData = DateTime.Now;
+            }
+            ViewData["minData"] = minData.Value.ToString("yyyy-MM-dd");
+            ViewData["maxData"] = maxData.Value.ToString("yyyy-MM-dd");
             var result = await _salesRecordService.FindByDateAsync(minData, maxData);
             return View(result);
+        }
+
+        public async Task<IActionResult> GroupingSearch(DateTime? minData, DateTime? maxData)
+        {
+            
+            return View();
         }
 
         public IActionResult GroupingSearch()
