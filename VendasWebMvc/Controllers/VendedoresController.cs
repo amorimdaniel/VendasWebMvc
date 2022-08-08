@@ -7,6 +7,7 @@ using VendasWebMvc.Services;
 using VendasWebMvc.Models;
 using VendasWebMvc.Models.ViewModels;
 namespace VendasWebMvc.Controllers
+
 {
     public class VendedoresController : Controller
     {
@@ -62,6 +63,22 @@ namespace VendasWebMvc.Controllers
         {
             _vendedorServico.Remove(id);
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _vendedorServico.FindById(id.Value);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
         }
     }
 }
