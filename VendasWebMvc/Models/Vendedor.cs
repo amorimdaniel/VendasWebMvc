@@ -8,17 +8,26 @@ namespace VendasWebMvc.Models
 {
     public class Vendedor
     {
+        [Required(ErrorMessage = "{0} Necessário")]
         public int Id { get; set; }
+
+        [Required(ErrorMessage ="{0} Necessário")]
+        [StringLength(60, MinimumLength = 3, ErrorMessage = "Tamnho do {0} precisa ser entre {2} e {1}")]
         public string Nome { get; set; }
 
+        [Required(ErrorMessage = "{0} Necessário")]
+        [EmailAddress(ErrorMessage ="Entre com um email válido")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "{0} Necessário")]
         [Display(Name = "Data de Nascimento")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DataNascimento { get; set; }
 
+        [Required(ErrorMessage = "{0} Necessário")]
+        [Range(100.0, 50000.0, ErrorMessage = "{0} deve ser entre {1} e {2}")]
         [Display(Name = "Salário Base")]
         [DisplayFormat(DataFormatString = "{0:f2}")]
         public double BaseSalario { get; set; }
